@@ -68,7 +68,7 @@ abstract class Service<UserServiceMgr : UserServiceManager,
     }
 
     init {
-        RishConfig.init(AstroStarApiConstant.server.BINDER_DESCRIPTOR, 30000)
+        RishConfig.init(AstroStarApiConstant.server.BINDER_DESCRIPTOR, Integer.MAX_VALUE)
         userServiceManager = onCreateUserServiceManager()
         configManager = onCreateConfigManager()
         clientManager = onCreateClientManager()

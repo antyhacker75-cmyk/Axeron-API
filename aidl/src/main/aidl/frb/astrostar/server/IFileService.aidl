@@ -1,5 +1,5 @@
 // IFileService.aidl
-package frb.axeron.server;
+package frb.astrostar.server;
 
 import frb.axeron.server.IOutputStreamCallback;
 parcelable FileStat;

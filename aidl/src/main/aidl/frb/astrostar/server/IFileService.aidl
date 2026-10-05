@@ -1,7 +1,7 @@
 // IFileService.aidl
 package frb.astrostar.server;
 
-import frb.axeron.server.IOutputStreamCallback;
+import frb.astrostar.server.IOutputStreamCallback;
 parcelable FileStat;
 // Declare any non-default types here with import statements
 

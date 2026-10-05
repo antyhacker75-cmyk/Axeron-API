@@ -1,5 +1,5 @@
 // IOutputStreamCallback.aidl
-package frb.axeron.server;
+package frb.astrostar.server;
 
 interface IOutputStreamCallback {
 

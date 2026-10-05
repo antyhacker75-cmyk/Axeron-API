@@ -585,7 +585,7 @@ object AstroStarPluginService {
             }
 
             val cmd =
-                "CLASSPATH=$ASTROSTARBIN/ax_reignite.dex; app_process / frb.astrostar.reignite.Igniter ${AtsroStarSettings.getEnableDeveloperOptions()}"
+                "CLASSPATH=$ASTROSTARBIN/ax_reignite.dex; app_process / frb.astrostar.reignite.Igniter ${AstroStarSettings.getEnableDeveloperOptions()}"
 
             Log.d(TAG, "Start Init Service")
 
@@ -609,7 +609,7 @@ object AstroStarPluginService {
         if (files.isEmpty()) return@withContext
 
         for (filename in files) {
-            val dstFile = File(ATSROSTARBIN, filename)
+            val dstFile = File(ASTROSTARBIN, filename)
             if (!fs.exists(dstFile.absolutePath)) continue
 
             if (!fs.delete(dstFile.absolutePath)) {

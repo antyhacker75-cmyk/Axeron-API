@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Axeron-API"
+rootProject.name = "AstroStar-API"
 include(":api")
 include(":aidl")
 include(":shell")

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "frb.axeron.axerish"
+    namespace = "frb.astrostar.axerish"
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")

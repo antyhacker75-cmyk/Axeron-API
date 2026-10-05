@@ -90,7 +90,7 @@ subprojects {
             """.trimIndent()
             )
 
-            val groupIdBase = "dev.frb.axeron"
+            val groupIdBase = "dev.frb.astrostar"
 
             val publishLibrary =
                 (findProperty("publishLibrary") as? Boolean) ?: false

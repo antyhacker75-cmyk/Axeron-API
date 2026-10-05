@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "frb.axeron.provider"
+    namespace = "frb.astrostar.provider"
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")

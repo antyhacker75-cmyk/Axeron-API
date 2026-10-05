@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "frb.axeron.shell"
+    namespace = "frb.astrostar.shell"
 
     defaultConfig {
-        applicationId = "frb.axeron.shell"
+        applicationId = "frb.astrostar.shell"
     }
 
     buildTypes {

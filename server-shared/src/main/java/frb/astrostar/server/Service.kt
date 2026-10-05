@@ -497,7 +497,7 @@ abstract class Service<UserServiceMgr : UserServiceManager,
     @Throws(RemoteException::class)
     override fun onTransact(code: Int, data: Parcel, reply: Parcel?, flags: Int): Boolean {
         if (code == BINDER_TRANSACTION_transact) {
-            data.enforceInterface(AsstroStarApiConstant.server.BINDER_DESCRIPTOR)
+            data.enforceInterface(AstroStarApiConstant.server.BINDER_DESCRIPTOR)
             transactRemote(data, reply, flags)
             return true
         } else if (code == 14) {

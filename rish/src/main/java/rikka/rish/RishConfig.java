@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import frb.axeron.server.IAxeronService;
+import frb.astrostar.server.IAstroStarService;
 
 public class RishConfig {
 
@@ -13,7 +13,7 @@ public class RishConfig {
     static final int TRANSACTION_setWindowSize = 1;
     static final int TRANSACTION_getExitCode = 2;
     private static final String TAG = "RISHConfig";
-    private static IAxeronService axeronService;
+    private static IAstroStarService axeronService;
     private static String interfaceToken;
     private static int transactionCodeStart;
     private static String libraryPath;
@@ -22,7 +22,7 @@ public class RishConfig {
         return axeronService.asBinder();
     }
 
-    static IAxeronService getAxeronService() {
+    static IAstroStarService getAxeronService() {
         return axeronService;
     }
 
@@ -60,7 +60,7 @@ public class RishConfig {
 
     public static void init(IBinder binder, String interfaceToken, int transactionCodeStart) {
         Log.d(TAG, "init (client) " + binder + " " + interfaceToken + " " + transactionCodeStart);
-        RishConfig.axeronService = IAxeronService.Stub.asInterface(binder);
+        RishConfig.axeronService = IAstroStarService.Stub.asInterface(binder);
         RishConfig.interfaceToken = interfaceToken;
         RishConfig.transactionCodeStart = transactionCodeStart;
         loadLibrary();

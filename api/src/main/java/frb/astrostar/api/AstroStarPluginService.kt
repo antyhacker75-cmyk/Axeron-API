@@ -158,44 +158,51 @@ object AstroStarPluginService {
     }
 
     suspend fun flashPlugin(
-        installer: PluginInstaller,
-        onStdout: (String) -> Unit,
-        onStderr: (String) -> Unit
-    ): FlashResult {
-        val fs = axFS ?: return FlashResult(-1, "AstroStar service unavailable", false)
-        val resolver = application.contentResolver
-        with(resolver.openInputStream(installer.uri)) {
-            val file =
-                File(
-                    PathHelper.getWorkingPath(ROOT_MODE, AstroStarApiConstant.folder.PARENT_ZIP),
-                    "module.zip"
-                )
+    installer: PluginInstaller,
+    onStdout: (String) -> Unit,
+    onStderr: (String) -> Unit
+): FlashResult {
+    val fs = axFS ?: return FlashResult(-1, "AstroStar service unavailable", false)
+    val resolver = application.contentResolver
 
-            val session = fs.getStreamSession(file.absolutePath, true, false)
-                ?: return FlashResult(-1, "Failed to create stream session", false)
-            val fos = session.outputStream
+    val file = File(
+        PathHelper.getWorkingPath(ROOT_MODE, AstroStarApiConstant.folder.PARENT_ZIP),
+        "module.zip"
+    )
 
-            val buffer = ByteArray(8 * 1024)
-            var bytesRead: Int
-            while (this?.read(buffer).also {
-                    bytesRead = it ?: -1
-                } != -1) {
-                fos.write(buffer, 0, bytesRead)
-            }
-            fos.flush()
-            this?.close()
+    resolver.openInputStream(installer.uri)?.use { inputStream ->
+        val session = fs.getStreamSession(file.absolutePath, true, false)
+            ?: return FlashResult(-1, "Failed to create stream session", false)
 
-            val cmd =
-                "ZIPFILE=${file.absolutePath}; . functions.sh; install_plugin ${installer.autoEnable}; exit 0"
-            val result = execWithIO(cmd, onStdout, onStderr, standAlone = true)
+        val fos = session.outputStream
 
-            Log.i(TAG, "install module ${installer.uri} result: $result")
+        val buffer = ByteArray(8 * 1024)
+        var bytesRead: Int
 
-            fs.delete(file.absolutePath)
+        while (true) {
+            val read = inputStream.read(buffer)
+            if (read == -1) break
 
-            return FlashResult(result)
+            bytesRead = read
+            fos.write(buffer, 0, bytesRead)
         }
+
+        fos.flush()
+        fos.close()
+
+        val cmd =
+            "ZIPFILE=${file.absolutePath}; . functions.sh; install_plugin ${installer.autoEnable}; exit 0"
+        val result = execWithIO(cmd, onStdout, onStderr, standAlone = true)
+
+        Log.i(TAG, "install module ${installer.uri} result: $result")
+
+        fs.delete(file.absolutePath)
+
+        return FlashResult(result)
     }
+
+    return FlashResult(-1, "Failed to open installer input stream", false)
+}
 
     data class ResultExec(
         @SerializedName("errno")

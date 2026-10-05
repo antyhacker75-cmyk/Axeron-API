@@ -1,4 +1,4 @@
-package frb.axeron.api;
+package frb.astrostar.api;
 
 import android.annotation.SuppressLint;
 import android.os.IBinder;

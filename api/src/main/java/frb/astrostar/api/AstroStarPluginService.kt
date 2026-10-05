@@ -736,7 +736,7 @@ object AstroStarPluginService {
 
             val cmdBB =
                 "cp $BUSYBOX ${dstBusyBox.absolutePath} && chmod 755 ${dstBusyBox.absolutePath}" +
-                        " && ${dstBusyBox.absolutePath} --install -s $ASTROSTARBIN"
+                        " && [ ! -e $ASTROSTARBIN/ls ] && ${dstBusyBox.absolutePath} --install -s $ASTROSTARBIN"
 
             val rBB = execWithIO(cmdBB, useBusybox = false, hideStderr = false)
             if (!rBB.isSuccess()) {
